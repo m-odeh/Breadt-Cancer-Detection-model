@@ -1,23 +1,12 @@
-
-# coding: utf-8
-
-# In[3]:
-
-
 import numpy as np
-
 from sklearn import preprocessing,cross_validation
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from sklearn import model_selection
 from sklearn.metrics import classification_report,accuracy_score
-
 from pandas.plotting import scatter_matrix
 import pandas as pd
 import matplotlib.pyplot as plt
-
-
-# In[4]:
 
 
 #Loading the data set from uci
@@ -28,9 +17,6 @@ names=['id','clump_thickness','uniform_cell_size','uniform_cell_shape',
 Data=pd.read_csv(url,names=names)
 
 
-# In[10]:
-
-
 #preprocess the data
 Data.replace('?',-99999,inplace=True)
 print(Data.axes)  #print data axes
@@ -38,15 +24,10 @@ Data.drop(['id'],1,inplace=True)
 print(Data.shape)  #print data shape
 
 
-# In[15]:
-
-
 #data visualization 
 print(Data.loc[0])
 print(Data.describe())
 
-
-# In[20]:
 
 
 #plot histogram for each variable
@@ -54,15 +35,10 @@ Data.hist(figsize=(10,10))
 plt.show()
 
 
-# In[24]:
-
-
 #scatter plot matrix
 scatter_matrix(Data,figsize=(18,18))
 plt.show()
 
-
-# In[28]:
 
 
 #create x and y data
@@ -72,15 +48,9 @@ y=np.array(Data['class'])
 x_train,x_test,y_train,y_test = cross_validation.train_test_split(x,y,test_size=0.2)
 
 
-# In[35]:
-
-
 #specifiy testing option 
 seed=8
 scoring='accuracy'
-
-
-# In[38]:
 
 
 #define the model to train
@@ -100,9 +70,6 @@ for name,model in models :
     
     msg="%s %f (%f)" % (name,cv_results.mean(),cv_results.std())
     print(msg)
-
-
-# In[41]:
 
 
 # make prediction on the test set 
